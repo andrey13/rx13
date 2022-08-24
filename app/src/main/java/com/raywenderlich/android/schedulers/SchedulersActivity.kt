@@ -2,6 +2,7 @@ package com.raywenderlich.android.schedulers
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
@@ -33,8 +34,23 @@ class SchedulersActivity : AppCompatActivity() {
     fruit
       .subscribeOn(Schedulers.io())
       .dump()
+      .observeOn(AndroidSchedulers.mainThread())
       .dumpingSubscription()
       .addTo(disposables)
+
+    val animalsThread = Thread {
+      Thread.sleep(3000)
+      animal.onNext("[cat]")
+      Thread.sleep(3000)
+      animal.onNext("[tiger]")
+      Thread.sleep(3000)
+      animal.onNext("[fox]")
+      Thread.sleep(3000)
+      animal.onNext("[leopard]")
+    }
+
+    animalsThread.name = "Animals Thread"
+    animalsThread.start()
   }
 
   override fun onDestroy() {
