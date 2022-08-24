@@ -51,6 +51,7 @@ class SchedulersActivity : AppCompatActivity() {
 
     animalsThread.name = "Animals Thread"
     animalsThread.start()
+
   }
 
   override fun onDestroy() {
