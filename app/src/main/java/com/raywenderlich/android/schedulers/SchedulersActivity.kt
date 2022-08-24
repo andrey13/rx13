@@ -20,6 +20,7 @@ class SchedulersActivity : AppCompatActivity() {
     val animal = BehaviorSubject.createDefault("[dog]")
 
     animal
+      .subscribeOn(AndroidSchedulers.mainThread())
       .dump()
       .observeOn(Schedulers.io())
       .dumpingSubscription()
