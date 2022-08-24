@@ -21,7 +21,9 @@ class SchedulersActivity : AppCompatActivity() {
 
     animal
       .dump()
+      .observeOn(Schedulers.io())
       .dumpingSubscription()
+      .addTo(disposables)
 
     val fruit = Observable.create<String> { observer ->
       observer.onNext("[apple]")
