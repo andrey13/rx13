@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
+import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 
 class SchedulersActivity : AppCompatActivity() {
@@ -30,6 +31,7 @@ class SchedulersActivity : AppCompatActivity() {
     }
 
     fruit
+      .subscribeOn(Schedulers.io())
       .dump()
       .dumpingSubscription()
       .addTo(disposables)
